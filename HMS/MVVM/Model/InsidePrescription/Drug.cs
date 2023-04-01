@@ -1,0 +1,21 @@
+﻿using HMS.MVVM.Model.InsidePrescription.insideDrug;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HMS.MVVM.Model.InsidePrescription
+{
+	public class Drug
+	{
+		[Key]
+		public int Id { get; set; }
+		public string? TradeName { get; set; }
+		public string? GenericName { get; set; }
+
+		// Navigation property for the related Dosages objects
+		public virtual ICollection<Dosage>? Dosages { get; set; }
+	}
+}
