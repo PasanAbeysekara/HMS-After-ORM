@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:HMS.MVVM.View"
+             xmlns:icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
              xmlns:vm="clr-namespace:HMS.MVVM.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
@@ -13,9 +14,10 @@
         <vm:UserPatientsVM/>
     </UserControl.DataContext>
 
-    <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" 
+    <DataGrid Style="{DynamicResource DataGridStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" IsReadOnly="True"
                               RowStyle="{DynamicResource DataGridRowStyle1}" Grid.Row="5" ItemsSource="{Binding PatientData}" AutoGenerateColumns="False">
         <DataGrid.Columns>
+            
             <DataGridTextColumn Binding="{Binding Id}" Header="# ID"/>
             <DataGridTextColumn Binding="{Binding FullName}" Header="First Name"/>
             <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
@@ -27,10 +29,20 @@
             <DataGridTextColumn Binding="{Binding Weight}" Header="Weight"/>
             <DataGridTextColumn Binding="{Binding Height}" Header="Height"/>
 
-            <DataGridTemplateColumn>
+            <DataGridTemplateColumn Header="Action" Width="140">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Command="{Binding DataContext.DeletePatientCommand,ElementName=userPatients_window}" CommandParameter="{Binding}" Style="{StaticResource pagingButton}">Delete</Button>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Command="{Binding DataContext.DeletePrescriptionCommand,ElementName=userPrescriptions_window}" CommandParameter="{Binding}" Style="{StaticResource actionButton}">
+                                <icon:PackIconMaterial Kind="Account" Style="{StaticResource actionButtonIcon}"/>
+                            </Button>
+                            <Button Command="{Binding DataContext.DeletePrescriptionCommand,ElementName=userPrescriptions_window}" CommandParameter="{Binding}" Style="{StaticResource actionButton}">
+                                <icon:PackIconMaterial Kind="AccountEdit" Style="{StaticResource actionButtonIcon}"/>
+                            </Button>
+                            <Button Command="{Binding DataContext.DeletePrescriptionCommand,ElementName=userPrescriptions_window}" CommandParameter="{Binding}" Style="{StaticResource actionButton}">
+                                <icon:PackIconMaterial Kind="Delete" Style="{StaticResource actionButtonIcon}"/>
+                            </Button>
+                        </StackPanel>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
